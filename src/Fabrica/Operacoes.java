@@ -1,12 +1,11 @@
 package Fabrica;
 import java.util.*;
 public class Operacoes {
-	List <Integer> maquinas = new ArrayList <>();
-	List <String> setores = new ArrayList <>();
-	int semana[][] = new int[8][6];
-	int semana2[][] = new int[8][6];
-	int dia = 0;
-	int maquina = 1;
+	List <Integer> maquinas = new ArrayList <>();	//Lista das máquinas
+	List <String> setores = new ArrayList <>();		//Lista dos setores, alinhada com a das máquinas
+	int semana[][] = new int[8][6];					//Matriz da semana
+	int dia = 0;									//Contador de dias
+	int maquina = 1;								//Contador de máquinas
 	
 	Scanner entrada = new Scanner(System.in);
 	public void menu() {			//Printa o menu
@@ -18,21 +17,22 @@ public class Operacoes {
 		System.out.println("5 - Encerrar sistema");
 	}
 	
-	public void maquinas() {			//Print as máquinas e seus setores 
+	public void maquinas() {			//Printa as máquinas e seus setores 
 		System.out.println("Máquinas: ");
 		System.out.println(maquinas);
+		System.out.println("Setores:");
 		System.out.println(setores);
 	}
 	
 	public void cadastrar() {
 		int opcao = 0;
-		if (maquina > 5) {		//Condição caso o usuário tente cadastrar mais que 6 máquinas
+		if (maquina > 6) {		//Condição caso o usuário tente cadastrar mais que 6 máquinas
 			System.out.println("Você atingiu o número limite de máquinas.");
 			return;
 		}
 		System.out.println("Digite o setor da máquina " + maquina + "(limite de 6 máquinas)\n1- Algodão\n2- Poliéster\n3- Mistos");
-		opcao = entrada.nextInt();
-		switch (opcao) {
+		opcao = entrada.nextInt();			
+		switch (opcao) {				//Adição à lista de setores de acordo com o que o usuário digitar
 		case 1:
 			setores.add("algodao");
 			break;
@@ -85,9 +85,6 @@ public class Operacoes {
 			soma = 0;
 			media = 0;
 		}
-		
-		
-		
 		
 		System.out.println("Relatório da semana por máquinas:\nLinha 1:Máquinas\nLinhas2-6: Dias da semana"
 							+ "\nLinha 7: Soma da produção\n" + "Linha 8: Média produzida por cada máquina ");
@@ -142,23 +139,43 @@ public class Operacoes {
 		int opcao = 0;		
 		while (opcao != 4) {				//Pergunta para o usuário o que ele quer visualizar
 			System.out.println("Digite qual setor deseja ver a produção total e sua média"
-							+ "(1- Algodão, 2- Poliéster, 3- Mistos, 4- Sair: ");
+							+ "(1- Algodão, 2- Poliéster, 3- Mistos, 4- Sair): ");
 			opcao = entrada.nextInt();
 			switch(opcao) {
 			case 1:
 				System.out.println("Produção total do setor de algodão: " + somaA);
 				System.out.println("Média da produção: " + mediaA);
+				if (somaA < 100) {
+					System.out.println("A produção de algodão está abaixo da média.");			//Avisos de produtividde
+				}
+				else if (somaA > 400) {
+					System.out.println("A produção de algodão está acima da média!");
+				}
 				break;
 			case 2:
 				System.out.println("Produção total do setor de algodão: " + somaP);
 				System.out.println("Média da produção: " + mediaP);
+				if (somaP < 100) {
+					System.out.println("A produção de algodão está abaixo da média.");
+				}
+				else if (somaP > 400) {
+					System.out.println("A produção de algodão está acima da média!");
+				}
 				break;
 			case 3:
 				System.out.println("Produção total do setor de algodão: " + somaM);
 				System.out.println("Média da produção: " + mediaM);
+				if (somaA < 100) {
+					System.out.println("A produção de algodão está abaixo da média.");
+				}
+				else if (somaA > 400) {
+					System.out.println("A produção de algodão está acima da média!");
+				}
 				break;
 			case 4:
 				break;
+			default:
+				System.out.println("Digite uma opção válida.");
 			}
 		}
 		
