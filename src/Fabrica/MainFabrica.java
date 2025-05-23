@@ -21,6 +21,9 @@ public class MainFabrica {
 			case 3:
 				operacao.relatorio();
 				break;
+			case 4:
+				operacao.maquinas();
+				break;
 			default: 
 				System.out.println("Opção invalida");
 				break;
