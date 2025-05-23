@@ -9,7 +9,7 @@ public class Operacoes {
 	int maquina = 1;
 	
 	Scanner entrada = new Scanner(System.in);
-	public void menu() {
+	public void menu() {			//Printa o menu
 		System.out.println("---MENU---");
 		System.out.println("1 - Cadastrar máquina");
 		System.out.println("2 - Registrar produção do dia");
@@ -18,7 +18,7 @@ public class Operacoes {
 		System.out.println("5 - Encerrar sistema");
 	}
 	
-	public void maquinas() {
+	public void maquinas() {			//Print as máquinas e seus setores 
 		System.out.println("Máquinas: ");
 		System.out.println(maquinas);
 		System.out.println(setores);
@@ -26,6 +26,10 @@ public class Operacoes {
 	
 	public void cadastrar() {
 		int opcao = 0;
+		if (maquina > 5) {		//Condição caso o usuário tente cadastrar mais que 6 máquinas
+			System.out.println("Você atingiu o número limite de máquinas.");
+			return;
+		}
 		System.out.println("Digite o setor da máquina " + maquina + "(limite de 6 máquinas)\n1- Algodão\n2- Poliéster\n3- Mistos");
 		opcao = entrada.nextInt();
 		switch (opcao) {
@@ -44,20 +48,27 @@ public class Operacoes {
 		}
 		System.out.println("Máquina registrada com sucesso!");
 		maquinas.add(maquina);
-		maquina ++;
+		maquina ++;					//Registra a máquina e seu setor, de acordo com a preferência do usuário
 		
 	}
 	
 	public void RegistrarProducao() {
 		dia++;
-		for(int i = 0;i < maquinas.size();i++) {
+		int p = 0;				
+		for(int i = 0;i < maquinas.size();i++) {			//Registra a produção e manda direto para a matriz com o relatório semanal
 			System.out.println("Digite a produção da máquina " + maquinas.get(i) + ": ");
-			semana[dia][i] = entrada.nextInt();
+			p = entrada.nextInt();
+			if (p < 0) {
+				System.out.println("Produção inválida, tente novamente.");	//Condição caso o usuário digite um número menor que 0
+				i--;
+				continue;
+			}
+			semana[dia][i] = p;
+			p = 0;
 		}
 	}
 	
-	public void relatorio() {
-				//Faz a soma da produção de cada dia da semana
+	public void relatorio() {		//Faz a soma e a média da produção de cada dia da semana
 		int soma = 0;
 		int media = 0;
 		for (int i = 0;i < 5;i++) {
@@ -80,7 +91,7 @@ public class Operacoes {
 		
 		System.out.println("Relatório da semana por máquinas:\nLinha 1:Máquinas\nLinhas2-6: Dias da semana"
 							+ "\nLinha 7: Soma da produção\n" + "Linha 8: Média produzida por cada máquina ");
-		for (int i = 0;i < maquinas.size();i++) {
+		for (int i = 0;i < maquinas.size();i++) {					//Printa o relatório
 			System.out.print(maquinas.get(i) + "       ");
 		}
 		
@@ -94,7 +105,7 @@ public class Operacoes {
 		int somaA = 0; int somaP = 0; int somaM = 0;
 		int mediaA = 0; int mediaP = 0; int mediaM = 0;
 		
-		for (int i = 0;i < setores.size();i++) {
+		for (int i = 0;i < setores.size();i++) {		//Faz a soma e média de cada setor, utilizando a lista de setores
 			switch (setores.get(i)) {
 			case "algodao":
 				somaA += semana[6][i];
@@ -110,7 +121,7 @@ public class Operacoes {
 				break;
 			}	
 		}
-		if(mediaA == 0) {
+		if(mediaA == 0) {			//Condicionais para que não ocorra divisão por 0
 			mediaA = somaA;
 		}else {
 		mediaA = somaA / mediaA;
@@ -128,8 +139,8 @@ public class Operacoes {
 		mediaM = somaP / mediaP;
 		}
 		
-		int opcao = 0;
-		while (opcao != 4) {
+		int opcao = 0;		
+		while (opcao != 4) {				//Pergunta para o usuário o que ele quer visualizar
 			System.out.println("Digite qual setor deseja ver a produção total e sua média"
 							+ "(1- Algodão, 2- Poliéster, 3- Mistos, 4- Sair: ");
 			opcao = entrada.nextInt();
@@ -150,22 +161,6 @@ public class Operacoes {
 				break;
 			}
 		}
-		
-		
-		
-		
-		
-		if (semana2[0][0] != 0) {
-			System.out.println("Relatório da semana anterior: ");
-			System.out.println(dia);
-			for (int i = 0;i < 3;i++) {
-				for(int j = 0;j < 6;j++) {
-					System.out.print(semana2[i][j]);
-					}
-					System.out.println();
-				}
-		}
-		semana2 = semana.clone();
 		
 	}
 
