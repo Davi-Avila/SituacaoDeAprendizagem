@@ -138,13 +138,13 @@ public class Operacoes {
 		if(mediaP == 0) {
 			mediaP = somaP;
 		}else {
-		mediaP = somaP / mediaP;;
+		mediaP = somaP / mediaP;
 		}
 		
 		if(mediaM == 0) {
 			mediaM = somaM;
 		}else {
-		mediaM = somaP / mediaP;
+		mediaM = somaM / mediaM;
 		}
 		
 		int opcao = 0;		
