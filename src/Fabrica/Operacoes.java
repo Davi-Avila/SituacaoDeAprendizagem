@@ -54,6 +54,17 @@ public class Operacoes {
 	
 	public void RegistrarProducao() {
 		dia++;
+		
+		if (dia == 6) {
+			System.out.println("Nova semana iniciada!");
+			for (int i = 0;i < 6;i++) {
+				for (int j = 0;j < 6;j++) {
+					semana[i][j] = 0;
+				}
+			}
+			dia = 1;
+		}
+			
 		int p = 0;				
 		for(int i = 0;i < maquinas.size();i++) {			//Registra a produção e manda direto para a matriz com o relatório semanal
 			System.out.println("Digite a produção da máquina " + maquinas.get(i) + ": ");
@@ -71,8 +82,8 @@ public class Operacoes {
 	public void relatorio() {		//Faz a soma e a média da produção de cada dia da semana
 		int soma = 0;
 		int media = 0;
-		for (int i = 0;i < 5;i++) {
-			for (int j = 0;j < 4;j++) {
+		for (int i = 0;i < 6;i++) {
+			for (int j = 0;j < 6;j++) {
 				soma += semana[j][i];
 				if(semana[j][i] > 0) {
 					media++;
@@ -138,41 +149,42 @@ public class Operacoes {
 		
 		int opcao = 0;		
 		while (opcao != 4) {				//Pergunta para o usuário o que ele quer visualizar
-			System.out.println("Digite qual setor deseja ver a produção total e sua média"
+			System.out.println("Digite qual setor deseja consultar"
 							+ "(1- Algodão, 2- Poliéster, 3- Mistos, 4- Sair): ");
 			opcao = entrada.nextInt();
 			switch(opcao) {
 			case 1:
 				System.out.println("Produção total do setor de algodão: " + somaA);
 				System.out.println("Média da produção: " + mediaA);
-				if (somaA < 100) {
+				if (somaA < 400) {
 					System.out.println("A produção de algodão está abaixo da média.");			//Avisos de produtividde
 				}
-				else if (somaA > 400) {
+				else if (somaA >= 400) {
 					System.out.println("A produção de algodão está acima da média!");
 				}
 				break;
 			case 2:
 				System.out.println("Produção total do setor de algodão: " + somaP);
 				System.out.println("Média da produção: " + mediaP);
-				if (somaP < 100) {
-					System.out.println("A produção de algodão está abaixo da média.");
+				if (somaP < 400) {
+					System.out.println("A produção de poliéster está abaixo da média.");
 				}
-				else if (somaP > 400) {
-					System.out.println("A produção de algodão está acima da média!");
+				else if (somaP >= 400) {
+					System.out.println("A produção de poliéster está acima da média!");
 				}
 				break;
 			case 3:
 				System.out.println("Produção total do setor de algodão: " + somaM);
 				System.out.println("Média da produção: " + mediaM);
-				if (somaA < 100) {
-					System.out.println("A produção de algodão está abaixo da média.");
+				if (somaA < 400) {
+					System.out.println("A produção de mistos está abaixo da média.");
 				}
-				else if (somaA > 400) {
-					System.out.println("A produção de algodão está acima da média!");
+				else if (somaA >= 400) {
+					System.out.println("A produção de mistos está acima da média!");
 				}
 				break;
 			case 4:
+				System.out.println("Saindo...");
 				break;
 			default:
 				System.out.println("Digite uma opção válida.");
